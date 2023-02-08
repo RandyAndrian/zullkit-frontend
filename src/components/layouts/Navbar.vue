@@ -14,8 +14,8 @@ import AuthButton from "./AuthButton.vue";
       class="container flex flex-wrap items-center justify-between mx-auto my-2"
     >
       <Logo />
-      <!-- <AuthButton /> -->
-      <UserInfo />
+      <AuthButton />
+      <!-- <UserInfo /> -->
       <NavigationLinks />
     </div>
   </nav>
