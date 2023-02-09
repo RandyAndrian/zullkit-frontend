@@ -1,9 +1,9 @@
 <script setup>
-import Gallery from "../components/detail/Gallery.vue";
-import { useUserStore } from "../stores/user";
+import Gallery from "@/components/detail/Gallery.vue";
+import { useUserStore } from "@/stores/user";
 
 import { RouterLink, useRoute } from "vue-router";
-import { onMounted, ref, computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 import axios from "axios";
 
 const route = useRoute();
@@ -15,8 +15,7 @@ const item = ref(false);
 async function getProduct() {
   try {
     const response = await axios.get(
-      "https://zullkit-backend.demo.belajarkoding.com/api/products?id=" +
-        route.params.id
+      "https://zullkit-backend.demo.belajarkoding.com?id=" + route.params.id
     );
     item.value = response.data.data;
   } catch (error) {
@@ -30,7 +29,6 @@ const features = computed(() => {
 
 onMounted(() => {
   window.scrollTo(0, 0);
-  userStore.fetchUser();
   getProduct();
 });
 </script>
@@ -73,6 +71,7 @@ onMounted(() => {
                   </div>
                 </div>
               </div>
+
               <div class="mb-4" v-if="item.is_sketch == 1">
                 <div class="flex mb-2">
                   <div>
@@ -88,6 +87,7 @@ onMounted(() => {
                   </div>
                 </div>
               </div>
+
               <div>
                 <h1 class="mt-5 mb-3 font-semibold text-md">Great Features</h1>
                 <ul class="mb-6 text-gray-500" v-if="item">
@@ -101,13 +101,15 @@ onMounted(() => {
                   </li>
                 </ul>
               </div>
-              <a
-                v-if="user.data.subscription.length > 0"
-                :href="item.file"
-                class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-full hover:bg-indigo-700 md:py-2 md:text-md md:px-10 hover:shadow"
-              >
-                Download Now
-              </a>
+              <div v-if="user.data">
+                <a
+                  v-if="user.data.subscription.length > 0"
+                  :href="item.file"
+                  class="inline-flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-full hover:bg-indigo-700 md:py-2 md:text-md md:px-10 hover:shadow"
+                >
+                  Download Now
+                </a>
+              </div>
               <RouterLink
                 v-else
                 to="/pricing"
