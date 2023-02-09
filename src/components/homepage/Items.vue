@@ -9,7 +9,7 @@ const items = ref([]);
 async function getItemsData() {
   try {
     const response = await axios.get(
-      "https://zullkit-backend.buildwithangga.id/api/products"
+      "https://zullkit-backend.demo.belajarkoding.com/api/products"
     );
     items.value = response.data.data.data;
   } catch (error) {

@@ -9,7 +9,7 @@ const categories = ref([]);
 async function getCategoriesData() {
   try {
     const response = await axios.get(
-      "https://zullkit-backend.buildwithangga.id/api/categories?show_product=1&limit=12"
+      "https://zullkit-backend.demo.belajarkoding.com/api/categories?show_product=1&limit=12"
     );
     categories.value = response.data.data.data;
   } catch (error) {

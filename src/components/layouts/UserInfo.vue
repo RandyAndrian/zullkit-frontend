@@ -1,8 +1,22 @@
 <script setup>
+import { ref } from "vue";
 import { RouterLink } from "vue-router";
 const props = defineProps({
   user: Object,
 });
+
+const show = ref(false);
+
+function toggleDropdown() {
+  show.value = !show.value;
+}
+
+function logout() {
+  localStorage.clear("access_token");
+  localStorage.clear("token_type");
+
+  router.push("/login");
+}
 </script>
 
 <template>
@@ -15,6 +29,7 @@ const props = defineProps({
         id="user-menu-button"
         aria-expanded="false"
         data-dropdown-toggle="dropdown"
+        @click="toggleDropdown"
       >
         <span class="sr-only">Open user menu</span>
         <img
@@ -27,6 +42,7 @@ const props = defineProps({
     <div
       class="z-50 fixed right-20 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
       id="dropdown"
+      :class="{ hidden: !show }"
     >
       <div class="px-4 py-3">
         <span class="block text-sm text-gray-900 dark:text-white">{{
@@ -55,6 +71,7 @@ const props = defineProps({
         <li>
           <a
             href=""
+            @click="logout"
             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
             >Sign out</a
           >

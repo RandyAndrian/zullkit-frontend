@@ -16,15 +16,12 @@ const form = ref({
 
 async function register() {
   try {
-    const response = await axios.post(
-      "http://zullkit-backend.buildwithangga.id/api/register",
-      {
-        name: form.value.name,
-        email: form.value.email,
-        password: form.value.password,
-        title: form.value.title,
-      }
-    );
+    const response = await axios.post(".buildwithangga.id/api/register", {
+      name: form.value.name,
+      email: form.value.email,
+      password: form.value.password,
+      title: form.value.title,
+    });
     localStorage.setItem("access_token", response.data.data.access_token);
     localStorage.setItem("token_type", response.data.data.token_type);
 

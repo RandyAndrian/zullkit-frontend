@@ -14,7 +14,7 @@ export const useUserStore = defineStore({
     async fetchUser() {
       try {
         const { data } = await axios.get(
-          "http://zullkit-backend.buildwithangga.id/api/user",
+          "https://zullkit-backend.demo.belajarkoding.com/api/user",
           {
             headers: {
               Authorization:
